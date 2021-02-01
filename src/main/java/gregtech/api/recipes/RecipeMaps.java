@@ -672,6 +672,11 @@ public class RecipeMaps {
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, MoveType.HORIZONTAL);
 
 
+    @ZenProperty
+    public static final RecipeMap<GasCollectorRecipeBuilder> GAS_COLLECTOR_RECIPES = new RecipeMap<>("air_collector", 0, 0, 0, 0, 0, 0, 1, 1, new GasCollectorRecipeBuilder())
+        .setSlotOverlay(true, true, GuiTextures.BOXED_OVERLAY)
+        .setProgressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, MoveType.HORIZONTAL); // TODO Change this
+
     /**
      * Example:
      * <pre>

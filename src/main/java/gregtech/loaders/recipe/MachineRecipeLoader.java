@@ -1055,6 +1055,8 @@ public class MachineRecipeLoader {
 
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().input(OrePrefix.ingot, Materials.Iron, 31).notConsumable(MetaItems.SHAPE_MOLD_ANVIL).outputs(new ItemStack(Blocks.ANVIL)).duration(31 * 512).EUt(4 * 16).buildAndRegister();
         RecipeMaps.ALLOY_SMELTER_RECIPES.recipeBuilder().input(OrePrefix.ingot, Materials.WroughtIron, 31).notConsumable(MetaItems.SHAPE_MOLD_ANVIL).outputs(new ItemStack(Blocks.ANVIL)).duration(31 * 512).EUt(4 * 16).buildAndRegister();
+
+        RecipeMaps.GAS_COLLECTOR_RECIPES.recipeBuilder().fluidOutputs(Materials.Air.getFluid(1000)).dimID(0).duration(20).EUt(16).buildAndRegister(); // TODO Temporary first test
     }
 
     private static void registerChemicalBathRecipes() {

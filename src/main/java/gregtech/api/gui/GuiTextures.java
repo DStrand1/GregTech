@@ -123,6 +123,7 @@ public class GuiTextures {
     public static final TextureArea PROGRESS_BAR_SIFT = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_sift.png");
     public static final TextureArea PROGRESS_BAR_SLICE = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_slice.png");
     public static final TextureArea PROGRESS_BAR_WIREMILL = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_wiremill.png");
+    public static final TextureArea PROGRESS_BAR_GAS_COLLECTOR = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_gas_collector.png");
 
 
 }

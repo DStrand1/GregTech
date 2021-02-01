@@ -158,7 +158,7 @@ public class MetaTileEntities {
     public static MetaTileEntityWorkbench WORKBENCH;
     public static MetaTileEntityPump[] PUMP = new MetaTileEntityPump[4];
     public static MetaTileEntityBlockBreaker[] BLOCK_BREAKER = new MetaTileEntityBlockBreaker[4];
-    public static MetaTileEntityAirCollector[] AIR_COLLECTOR = new MetaTileEntityAirCollector[4];
+    public static MetaTileEntityAirCollector[] GAS_COLLECTOR = new MetaTileEntityAirCollector[4];
     public static MetaTileEntityItemCollector[] ITEM_COLLECTOR = new MetaTileEntityItemCollector[4];
     public static MetaTileEntityTeslaCoil TESLA_COIL;
     public static MetaTileEntityQuantumChest[] QUANTUM_CHEST = new MetaTileEntityQuantumChest[4];
@@ -500,12 +500,13 @@ public class MetaTileEntities {
         WORKBENCH = GregTechAPI.registerMetaTileEntity(825, new MetaTileEntityWorkbench(gregtechId("workbench")));
         ARMOR_TABLE = GregTechAPI.registerMetaTileEntity(826, new MetaTileEntityArmorTable(gregtechId("armor_table")));
 
+        // TODO Break Gas Collector out of this
         for (int i = 1; i < 5; i++) {
             String voltageName = GTValues.VN[i].toLowerCase();
             PUMP[i - 1] = new MetaTileEntityPump(gregtechId("pump." + voltageName), i);
-            AIR_COLLECTOR[i - 1] = new MetaTileEntityAirCollector(gregtechId("air_collector." + voltageName), i);
+            GAS_COLLECTOR[i - 1] = new MetaTileEntityAirCollector(gregtechId("air_collector." + voltageName), i); // TODO Does changing this break things?
             GregTechAPI.registerMetaTileEntity(900 + 10 * (i - 1), PUMP[i - 1]);
-            GregTechAPI.registerMetaTileEntity(950 + 10 * (i - 1), AIR_COLLECTOR[i - 1]);
+            GregTechAPI.registerMetaTileEntity(950 + 10 * (i - 1), GAS_COLLECTOR[i - 1]);
         }
 
         TESLA_COIL = new MetaTileEntityTeslaCoil(gregtechId("tesla_coil"));
