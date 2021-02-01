@@ -39,9 +39,11 @@ import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -135,6 +137,11 @@ public class GTJeiPlugin implements IModPlugin {
         registry.addRecipeCatalyst(MetaTileEntities.LARGE_TUNGSTENSTEEL_BOILER.getStackForm(), semiFluidMapId);
 
         registry.addIngredientInfo(Objects.requireNonNull(Materials.Air.getFluid(1000)), VanillaTypes.FLUID, I18n.format("gregtech.machine.air_collector.jei_description"));
+        NonNullList<ItemStack> airCollectors = NonNullList.create();
+        for (MetaTileEntity mte : Arrays.stream(MetaTileEntities.AIR_COLLECTOR).collect(Collectors.toList())) {
+            airCollectors.add(mte.getStackForm());
+        }
+        registry.addIngredientInfo(airCollectors, VanillaTypes.ITEM, I18n.format("gregtech.machine.air_collector.jei_description"));
 
         String primitiveBlastId = GTValues.MODID + ":" + "primitive_blast_furnace";
         registry.addRecipes(RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES.stream()
