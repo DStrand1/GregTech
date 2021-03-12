@@ -1,4 +1,4 @@
-package gregtech.common.blocks;
+package gregtech.dataFixer;
 
 import gregtech.api.unification.material.type.*;
 

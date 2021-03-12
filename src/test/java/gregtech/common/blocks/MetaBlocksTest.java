@@ -3,6 +3,7 @@ package gregtech.common.blocks;
 import gregtech.api.unification.material.*;
 import gregtech.api.unification.material.type.*;
 import gregtech.api.unification.ore.*;
+import gregtech.dataFixer.Mapping;
 import net.minecraft.init.*;
 import org.junit.*;
 
