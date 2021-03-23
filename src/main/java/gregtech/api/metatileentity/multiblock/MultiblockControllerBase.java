@@ -11,6 +11,8 @@ import gregtech.api.multiblock.BlockWorldState;
 import gregtech.api.multiblock.IPatternCenterPredicate;
 import gregtech.api.multiblock.PatternMatchContext;
 import gregtech.api.render.ICubeRenderer;
+import gregtech.api.render.OrientedOverlayRenderer;
+import gregtech.api.render.Textures;
 import gregtech.api.util.GTUtility;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
@@ -145,6 +148,15 @@ public abstract class MultiblockControllerBase extends MetaTileEntity {
     @Override
     public Pair<TextureAtlasSprite, Integer> getParticleTexture() {
         return Pair.of(getBaseTexture(null).getParticleSprite(), getPaintingColor());
+    }
+
+    /**
+     * Override this method to change the Controller overlay
+     * @return The overlay to render on the Multiblock Controller
+     */
+    @Nonnull
+    protected OrientedOverlayRenderer getFrontOverlay() {
+        return Textures.MULTIBLOCK_WORKABLE_OVERLAY;
     }
 
     protected void checkStructurePattern() {
