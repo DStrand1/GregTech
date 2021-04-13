@@ -89,7 +89,7 @@ public class RecyclingRecipes {
         DustMaterial material = (DustMaterial) materialStack.material;
         long materialAmount = materialStack.amount;
         if (material.hasFlag(MatFlags.FLAMMABLE)) {
-            return OreDictUnifier.getDust(Materials.Ash, materialAmount);
+            return OreDictUnifier.getDust(Materials.Ash, material.equals(Materials.Wood) ? materialAmount / 9 : materialAmount);
         } else if (material instanceof GemMaterial) {
             if (materialStack.material.materialComponents.stream()
                 .anyMatch(stack -> stack.material == Materials.Oxygen)) {
