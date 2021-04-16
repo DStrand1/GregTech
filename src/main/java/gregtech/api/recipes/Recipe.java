@@ -60,9 +60,11 @@ public class Recipe {
 
     private final Map<String, Object> recipeProperties;
 
+    private final String recipeName;
+
     public Recipe(List<CountableIngredient> inputs, List<ItemStack> outputs, List<ChanceEntry> chancedOutputs,
                   List<FluidStack> fluidInputs, List<FluidStack> fluidOutputs,
-                  Map<String, Object> recipeProperties, int duration, int EUt, boolean hidden) {
+                  Map<String, Object> recipeProperties, int duration, int EUt, boolean hidden, String recipeName) {
         this.recipeProperties = ImmutableMap.copyOf(recipeProperties);
         this.inputs = NonNullList.create();
         this.inputs.addAll(inputs);
@@ -74,6 +76,7 @@ public class Recipe {
         this.duration = duration;
         this.EUt = EUt;
         this.hidden = hidden;
+        this.recipeName = recipeName;
         //sort input elements in descending order (i.e not consumables inputs are last)
         this.inputs.sort(Comparator.comparing(CountableIngredient::getCount).reversed());
     }
@@ -279,6 +282,10 @@ public class Recipe {
 
     public boolean isHidden() {
         return hidden;
+    }
+
+    public String getName() {
+        return recipeName;
     }
 
     public boolean hasValidInputsForDisplay() {

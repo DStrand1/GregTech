@@ -16,7 +16,9 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
+import scala.collection.parallel.ParIterableLike;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -126,6 +128,8 @@ public class GTRecipeWrapper implements IRecipeWrapper {
         } else if (notConsumed) {
             tooltip.add(I18n.format("gregtech.recipe.not_consumed"));
         }
+        if (!input && Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
+            tooltip.add(TextFormatting.DARK_GRAY + I18n.format("gregtech.recipe.recipe_id", recipe.getName()));
     }
 
     @Override

@@ -1,11 +1,13 @@
 package gregtech.api.recipes.builders;
 
 import com.google.common.collect.ImmutableMap;
+import gregtech.api.GTValues;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.GTLog;
 import gregtech.api.util.ValidationResult;
 
 public class CutterRecipeBuilder extends RecipeBuilder<CutterRecipeBuilder> {
@@ -30,11 +32,12 @@ public class CutterRecipeBuilder extends RecipeBuilder<CutterRecipeBuilder> {
     public ValidationResult<Recipe> build() {
         return ValidationResult.newResult(finalizeAndValidate(),
             new Recipe(inputs, outputs, chancedOutputs, fluidInputs, fluidOutputs,
-                ImmutableMap.of(), duration, EUt, hidden));
+                ImmutableMap.of(), duration, EUt, hidden, recipeName));
     }
 
     @Override
     public void buildAndRegister() {
+        this.verifyRecipeName();
         if (fluidInputs.isEmpty()) {
             recipeMap.addRecipe(this.copy()
                 .fluidInputs(Materials.Water.getFluid(Math.max(4, Math.min(1000, duration * EUt / 320))))

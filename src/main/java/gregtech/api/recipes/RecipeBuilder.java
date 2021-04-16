@@ -1,5 +1,6 @@
 package gregtech.api.recipes;
 
+import gregtech.api.GTValues;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.Recipe.ChanceEntry;
 import gregtech.api.unification.material.type.FluidMaterial;
@@ -19,6 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
@@ -38,6 +40,8 @@ public abstract class RecipeBuilder<R extends RecipeBuilder<R>> {
 
     protected int duration, EUt;
     protected boolean hidden = false;
+
+    protected String recipeName = "";
 
     protected EnumValidationResult recipeStatus = EnumValidationResult.VALID;
 
@@ -88,6 +92,16 @@ public abstract class RecipeBuilder<R extends RecipeBuilder<R>> {
 
     public boolean applyProperty(String key, ItemStack item) {
         return false;
+    }
+
+    public R name(@Nonnull String recipeName) {
+        if (!recipeName.matches("^[a-zA-Z0-9_=.-]*$")) {
+            GTLog.logger.error("Recipe Name cannot be null, empty, or contain non-alphanumeric symbols other than \"_\", \"=\", \"-\", or \".\"");
+            GTLog.logger.error("Stacktrace:", new IllegalArgumentException());
+            recipeStatus = EnumValidationResult.INVALID;
+        }
+        this.recipeName = recipeName;
+        return (R) this;
     }
 
     public R inputs(ItemStack... inputs) {
@@ -314,8 +328,20 @@ public abstract class RecipeBuilder<R extends RecipeBuilder<R>> {
     }
 
     public void buildAndRegister() {
+        this.verifyRecipeName();
         ValidationResult<Recipe> validationResult = build();
         recipeMap.addRecipe(validationResult);
+    }
+
+    /**
+     * If you override {@link this.buildAndRegister}, make sure to call this method before
+     * calling build() or adding the recipe to the RecipeMap.
+     */
+    public void verifyRecipeName() {
+        if (this.recipeName.equals("")) {
+            this.recipeName = GTValues.MODID + ":" + this.recipeMap.getUnlocalizedName() + "-" + this.hashCode();
+            GTLog.logger.info("Recipe name: " + this.recipeName); // TODO REMOVE THIS
+        }
     }
 
     ///////////////////
@@ -345,6 +371,7 @@ public abstract class RecipeBuilder<R extends RecipeBuilder<R>> {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+            .append("recipeName", recipeName)
             .append("recipeMap", recipeMap)
             .append("inputs", inputs)
             .append("outputs", outputs)
@@ -356,5 +383,13 @@ public abstract class RecipeBuilder<R extends RecipeBuilder<R>> {
             .append("hidden", hidden)
             .append("recipeStatus", recipeStatus)
             .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Math.abs(this.inputs.hashCode()
+                      + this.outputs.hashCode()
+                      + this.fluidInputs.hashCode()
+                      + this.fluidOutputs.hashCode());
     }
 }

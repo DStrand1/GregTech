@@ -414,6 +414,10 @@ public class RecipeMap<R extends RecipeBuilder<R>> {
         return recipeBuilderSample.copy();
     }
 
+    public R recipeBuilder(String recipeName) {
+        return recipeBuilderSample.copy().name(recipeName);
+    }
+
     @ZenMethod("recipeBuilder")
     @Method(modid = GTValues.MODID_CT)
     public CTRecipeBuilder ctRecipeBuilder() {

@@ -71,6 +71,7 @@ public class ImplosionRecipeBuilder extends RecipeBuilder<ImplosionRecipeBuilder
 
     @Override
     public void buildAndRegister() {
+        verifyRecipeName();
         int amount  = Math.max(1, explosivesAmount / 2);
         if(explosivesType == null) {
             explosivesType = new ItemStack(Blocks.TNT, amount);
@@ -84,7 +85,7 @@ public class ImplosionRecipeBuilder extends RecipeBuilder<ImplosionRecipeBuilder
     public ValidationResult<Recipe> build() {
         return ValidationResult.newResult(finalizeAndValidate(),
             new Recipe(inputs, outputs, chancedOutputs, fluidInputs, fluidOutputs,
-                ImmutableMap.of(), duration, EUt, hidden));
+                ImmutableMap.of(), duration, EUt, hidden, recipeName));
     }
 
     @Override
