@@ -35,8 +35,37 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.circuit, Tier.Master);
                 case 7:
                     return new UnificationEntry(OrePrefix.circuit, Tier.Ultimate);
+                case 8:
+                    return new UnificationEntry(OrePrefix.circuit, Tier.Superconductor);
                 default:
                     return new UnificationEntry(OrePrefix.circuit, Tier.Infinite);
+            }
+        }
+    },
+    BETTER_CIRCUIT {
+        @Override
+        public Object getIngredient(int tier) {
+            switch (tier + 1) {
+                case 0:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Primitive);
+                case 1:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Basic);
+                case 2:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Good);
+                case 3:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Advanced);
+                case 4:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Extreme);
+                case 5:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Elite);
+                case 6:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Master);
+                case 7:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Ultimate);
+                case 8:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Superconductor);
+                default:
+                    return new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Infinite);
             }
         }
     },
@@ -129,10 +158,8 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.NiobiumTitanium);
                 case 7:
                     return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.Naquadah);
-                case 8:
-                    return new UnificationEntry(OrePrefix.cableGtSingle, MarkerMaterials.Tier.Superconductor);
                 default:
-                    return new UnificationEntry(OrePrefix.wireGtQuadruple, MarkerMaterials.Tier.Superconductor);
+                    return new UnificationEntry(OrePrefix.cableGtQuadruple, Materials.NaquadahAlloy);
             }
         }
     },
@@ -164,14 +191,21 @@ public enum CraftingComponent {
                 case 5:
                     return new UnificationEntry(OrePrefix.pipeMedium, Materials.TungstenSteel);
                 default:
-                    return new UnificationEntry(OrePrefix.pipeMedium, Materials.TungstenSteel);
+                    return new UnificationEntry(OrePrefix.pipeMedium, Materials.Ultimet);
             }
         }
     },
     GLASS {
         @Override
         public Object getIngredient(int tier) {
-            return new ItemStack(Blocks.GLASS, 1, W);
+            switch (tier) {
+                case 6:
+                case 7:
+                case 8:
+                    return GAMetaBlocks.TRANSPARENT_CASING.getItemVariant(GATransparentCasing.CasingType.REINFORCED_GLASS);
+                default:
+                    return new ItemStack(Blocks.GLASS, 1, W);
+            }
         }
     },
     PLATE {
@@ -193,10 +227,8 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.plate, Materials.HSSG);
                 case 7:
                     return new UnificationEntry(OrePrefix.plate, Materials.HSSE);
-                case 8:
-                    return new UnificationEntry(OrePrefix.plate, Materials.Darmstadtium);
                 default:
-                    return new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel);
+                    return new UnificationEntry(OrePrefix.plate, Materials.Neutronium);
             }
         }
     },
@@ -278,7 +310,6 @@ public enum CraftingComponent {
             switch (tier) {
                 case 0:
                 case 1:
-                    return new UnificationEntry(OrePrefix.gem, Materials.Diamond);
                 case 2:
                     return new UnificationEntry(OrePrefix.gem, Materials.Diamond);
                 default:
@@ -407,10 +438,8 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.HSSG);
                 case 7:
                     return new UnificationEntry(OrePrefix.wireGtDouble, Materials.Naquadah);
-                case 8:
-                    return new UnificationEntry(OrePrefix.wireGtDouble, Materials.NaquadahAlloy);
                 default:
-                    return new UnificationEntry(OrePrefix.wireGtOctal, Materials.Nichrome);
+                    return new UnificationEntry(OrePrefix.wireGtDouble, Materials.NaquadahAlloy);
             }
         }
     },
@@ -427,7 +456,6 @@ public enum CraftingComponent {
                 case 3:
                     return new UnificationEntry(OrePrefix.wireGtQuadruple, Materials.Copper);
                 case 4:
-                    return new UnificationEntry(OrePrefix.wireGtOctal, Materials.AnnealedCopper);
                 case 5:
                     return new UnificationEntry(OrePrefix.wireGtOctal, Materials.AnnealedCopper);
                 case 6:
@@ -530,6 +558,23 @@ public enum CraftingComponent {
                     return new UnificationEntry(OrePrefix.stick, Materials.Neodymium);
                 default:
                     return new UnificationEntry(OrePrefix.stick, Materials.VanadiumGallium);
+            }
+        }
+    },
+    STICK_RADIOACTIVE {
+        @Override
+        public Object getIngredient(int tier) {
+            switch (tier) {
+                case 4:
+                    return new UnificationEntry(OrePrefix.stick, Materials.Uranium235);
+                case 5:
+                    return new UnificationEntry(OrePrefix.stick, Materials.Plutonium241);
+                case 6:
+                    return new UnificationEntry(OrePrefix.stick, Materials.NaquadahEnriched);
+                case 7:
+                    return new UnificationEntry(OrePrefix.stick, Materials.Americium);
+                default:
+                    return new UnificationEntry(OrePrefix.stick, Materials.Tritanium);
             }
         }
     };
