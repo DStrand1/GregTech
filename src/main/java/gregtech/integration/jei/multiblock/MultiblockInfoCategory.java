@@ -48,6 +48,11 @@ public class MultiblockInfoCategory implements IRecipeCategory<MultiblockInfoRec
         put("large_steam_turbine", new MultiblockInfoRecipeWrapper(new LargeTurbineInfo(MetaTileEntities.LARGE_STEAM_TURBINE)));
         put("large_gas_turbine", new MultiblockInfoRecipeWrapper(new LargeTurbineInfo(MetaTileEntities.LARGE_GAS_TURBINE)));
         put("large_plasma_turbine", new MultiblockInfoRecipeWrapper(new LargeTurbineInfo(MetaTileEntities.LARGE_PLASMA_TURBINE)));
+        put("assembly_line", new MultiblockInfoRecipeWrapper(new AssemblyLineInfo()));
+        put("processing_array", new MultiblockInfoRecipeWrapper(new ProcessingArrayInfo()));
+        put("fusion_mk1", new MultiblockInfoRecipeWrapper(new FusionReactorInfo(1)));
+        put("fusion_mk2", new MultiblockInfoRecipeWrapper(new FusionReactorInfo(2)));
+        put("fusion_mk3", new MultiblockInfoRecipeWrapper(new FusionReactorInfo(3)));
     }};
 
     public static void registerRecipes(IModRegistry registry) {
