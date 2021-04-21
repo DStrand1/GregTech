@@ -46,7 +46,7 @@ public class AssemblyLineRecipeLoader {
                     .duration(2000).EUt(200000).buildAndRegister();
 
             RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                    .inputs(OreDictUnifier.get(OrePrefix.plate, GAMaterials.NEUTRONIUM, 16),
+                    .inputs(OreDictUnifier.get(OrePrefix.plate, Materials.Neutronium, 16),
                             MetaItems.WETWARE_MAINFRAME_MAX.getStackForm(4),
                             GAMetaItems.ENERGY_CLUSTER.getStackForm(8),
                             MetaItems.FIELD_GENERATOR_UV.getStackForm(2),
@@ -62,7 +62,7 @@ public class AssemblyLineRecipeLoader {
         }
         else {
             RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                    .inputs(OreDictUnifier.get(OrePrefix.plate, GAMaterials.NEUTRONIUM, 16),
+                    .inputs(OreDictUnifier.get(OrePrefix.plate, Materials.Neutronium, 16),
                             MetaItems.WETWARE_MAINFRAME_MAX.getStackForm(4),
                             MetaItems.ENERGY_LAPOTRONIC_ORB2.getStackForm(8),
                             MetaItems.FIELD_GENERATOR_UV.getStackForm(2),
@@ -142,9 +142,9 @@ public class AssemblyLineRecipeLoader {
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(OreDictUnifier.get(OrePrefix.block, Materials.NeodymiumMagnetic),
-                        OreDictUnifier.get(OrePrefix.stickLong, GAMaterials.NEUTRONIUM, 2),
-                        OreDictUnifier.get(OrePrefix.ring, GAMaterials.NEUTRONIUM, 4),
-                        OreDictUnifier.get(OrePrefix.valueOf("round"), GAMaterials.NEUTRONIUM, 16), // TODO valueOf
+                        OreDictUnifier.get(OrePrefix.stickLong, Materials.Neutronium, 2),
+                        OreDictUnifier.get(OrePrefix.ring, Materials.Neutronium, 4),
+                        OreDictUnifier.get(OrePrefix.valueOf("round"), Materials.Neutronium, 16), // TODO valueOf
                         OreDictUnifier.get(OrePrefix.wireGtSingle, MarkerMaterials.Tier.Superconductor, 64),
                         OreDictUnifier.get(OrePrefix.wireGtSingle, MarkerMaterials.Tier.Superconductor, 64),
                         OreDictUnifier.get(OrePrefix.wireGtSingle, MarkerMaterials.Tier.Superconductor, 64),
@@ -182,9 +182,9 @@ public class AssemblyLineRecipeLoader {
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(MetaItems.ELECTRIC_MOTOR_UV.getStackForm(),
                         OreDictUnifier.get(OrePrefix.pipeLarge, Materials.Ultimet, 2),
-                        OreDictUnifier.get(OrePrefix.screw, GAMaterials.NEUTRONIUM, 8),
+                        OreDictUnifier.get(OrePrefix.screw, Materials.Neutronium, 8),
                         OreDictUnifier.get(OrePrefix.ring, Materials.SiliconeRubber, 16),
-                        OreDictUnifier.get(OrePrefix.rotor, GAMaterials.NEUTRONIUM, 2),
+                        OreDictUnifier.get(OrePrefix.rotor, Materials.Neutronium, 2),
                         OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.NiobiumTitanium, 2))
                 .fluidInputs(Materials.SolderingAlloy.getFluid(1296),
                         Materials.Lubricant.getFluid(2000))
@@ -217,10 +217,10 @@ public class AssemblyLineRecipeLoader {
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(MetaItems.ELECTRIC_MOTOR_UV.getStackForm(2),
-                        OreDictUnifier.get(OrePrefix.plate, GAMaterials.NEUTRONIUM, 8),
-                        OreDictUnifier.get(OrePrefix.gear, GAMaterials.NEUTRONIUM, 4),
-                        OreDictUnifier.get(OrePrefix.stick, GAMaterials.NEUTRONIUM, 4),
-                        OreDictUnifier.get(OrePrefix.ingot, GAMaterials.NEUTRONIUM, 2),
+                        OreDictUnifier.get(OrePrefix.plate, Materials.Neutronium, 8),
+                        OreDictUnifier.get(OrePrefix.gear, Materials.Neutronium, 4),
+                        OreDictUnifier.get(OrePrefix.stick, Materials.Neutronium, 4),
+                        OreDictUnifier.get(OrePrefix.ingot, Materials.Neutronium, 2),
                         OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.NiobiumTitanium, 2))
                 .fluidInputs(Materials.StyreneButadieneRubber.getFluid(2880),
                         Materials.Lubricant.getFluid(2000))
@@ -253,10 +253,10 @@ public class AssemblyLineRecipeLoader {
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(MetaItems.ELECTRIC_MOTOR_UV.getStackForm(),
-                        OreDictUnifier.get(OrePrefix.plate, GAMaterials.NEUTRONIUM, 8),
-                        OreDictUnifier.get(OrePrefix.gearSmall, GAMaterials.NEUTRONIUM, 8),
-                        OreDictUnifier.get(OrePrefix.stick, GAMaterials.NEUTRONIUM, 4),
-                        OreDictUnifier.get(OrePrefix.ingot, GAMaterials.NEUTRONIUM, 2),
+                        OreDictUnifier.get(OrePrefix.plate, Materials.Neutronium, 8),
+                        OreDictUnifier.get(OrePrefix.gearSmall, Materials.Neutronium, 8),
+                        OreDictUnifier.get(OrePrefix.stick, Materials.Neutronium, 4),
+                        OreDictUnifier.get(OrePrefix.ingot, Materials.Neutronium, 2),
                         OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.NiobiumTitanium, 2))
                 .fluidInputs(Materials.SolderingAlloy.getFluid(1296),
                         Materials.Lubricant.getFluid(2000))
@@ -291,9 +291,9 @@ public class AssemblyLineRecipeLoader {
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(OreDictUnifier.get(OrePrefix.cableGtDouble, Materials.NiobiumTitanium, 16),
-                        OreDictUnifier.get(OrePrefix.screw, GAMaterials.NEUTRONIUM, 16),
-                        OreDictUnifier.get(OrePrefix.stick, GAMaterials.NEUTRONIUM, 16),
-                        OreDictUnifier.get(OrePrefix.ingot, GAMaterials.NEUTRONIUM),
+                        OreDictUnifier.get(OrePrefix.screw, Materials.Neutronium, 16),
+                        OreDictUnifier.get(OrePrefix.stick, Materials.Neutronium, 16),
+                        OreDictUnifier.get(OrePrefix.ingot, Materials.Neutronium),
                         MetaItems.ELECTRIC_MOTOR_UV.getStackForm(2),
                         MetaItems.ELECTRIC_PISTON_UV.getStackForm(),
                         OreDictUnifier.get(OrePrefix.circuit, MarkerMaterials.Tier.Master, 8))
@@ -329,7 +329,7 @@ public class AssemblyLineRecipeLoader {
                 .duration(600).EUt(61440).buildAndRegister();
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(OreDictUnifier.get(OrePrefix.frameGt, GAMaterials.NEUTRONIUM),
+                .inputs(OreDictUnifier.get(OrePrefix.frameGt, Materials.Neutronium),
                         MetaItems.EMITTER_ZPM.getStackForm(2),
                         OreDictUnifier.get(OrePrefix.foil, Materials.Osmiridium, 64),
                         OreDictUnifier.get(OrePrefix.foil, Materials.Osmiridium, 64),
@@ -368,7 +368,7 @@ public class AssemblyLineRecipeLoader {
                 .duration(600).EUt(61440).buildAndRegister();
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(OreDictUnifier.get(OrePrefix.frameGt, GAMaterials.NEUTRONIUM),
+                .inputs(OreDictUnifier.get(OrePrefix.frameGt, Materials.Neutronium),
                         MetaItems.SENSOR_ZPM.getStackForm(2),
                         OreDictUnifier.get(OrePrefix.foil, Materials.Osmiridium, 64),
                         OreDictUnifier.get(OrePrefix.foil, Materials.Osmiridium, 64),
@@ -409,7 +409,7 @@ public class AssemblyLineRecipeLoader {
                 .duration(600).EUt(245760).buildAndRegister();
 
         RecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(OreDictUnifier.get(OrePrefix.frameGt, GAMaterials.NEUTRONIUM),
+                .inputs(OreDictUnifier.get(OrePrefix.frameGt, Materials.Neutronium),
                         MetaItems.GRAVI_STAR.getStackForm(),
                         MetaItems.EMITTER_UV.getStackForm(4),
                         OreDictUnifier.get(OrePrefix.wireFine, Materials.Osmium, 64),
