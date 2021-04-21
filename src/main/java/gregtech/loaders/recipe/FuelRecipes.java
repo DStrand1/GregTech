@@ -1,5 +1,6 @@
 package gregtech.loaders.recipe;
 
+import forestry.core.fluids.Fluids;
 import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipes.FuelRecipe;
@@ -16,12 +17,13 @@ public class FuelRecipes {
         registerDieselGeneratorFuel(Materials.Methanol.getFluid(8), 21, GTValues.LV);
         registerDieselGeneratorFuel(Materials.Ethanol.getFluid(1), 6, GTValues.LV);
         registerDieselGeneratorFuel(Materials.BioDiesel.getFluid(1), 8, GTValues.LV);
-        registerDieselGeneratorFuel(Materials.LightFuel.getFluid(1), 10, GTValues.LV);
+        registerDieselGeneratorFuel(Materials.LightFuel.getFluid(32), 305, GTValues.LV);
         registerDieselGeneratorFuel(Materials.Fuel.getFluid(1), 15, GTValues.LV);
         registerDieselGeneratorFuel(Materials.NitroFuel.getFluid(2), 45, GTValues.LV);
+        registerDieselGeneratorFuel(Materials.RocketFuel.getFluid(2), 7, GTValues.LV);
 
         //steam generator fuels
-        registerSteamGeneratorFuel(Materials.Steam.getFluid(60), 1, GTValues.LV);
+        registerSteamGeneratorFuel(Materials.Steam.getFluid(64), 1, GTValues.LV);
 
         //low-tier gas turbine fuels
         registerGasGeneratorFuel(Materials.NaturalGas.getFluid(8), 5, GTValues.LV);
@@ -44,15 +46,21 @@ public class FuelRecipes {
         registerGasGeneratorFuel(Materials.LPG.getFluid(1), 10, GTValues.LV);
         registerGasGeneratorFuel(Materials.Naphtha.getFluid(1), 10, GTValues.LV);
         registerGasGeneratorFuel(Materials.Toluene.getFluid(4), 41, GTValues.LV);
+        registerGasGeneratorFuel(Materials.RocketFuel.getFluid(16), 125, GTValues.LV);
 
         //semi-fluid fuels, like creosote
-        registerSemiFluidGeneratorFuel(Materials.Creosote.getFluid(14), 1, GTValues.LV);
-        registerSemiFluidGeneratorFuel(Materials.Biomass.getFluid(14), 1, GTValues.LV);
-        registerSemiFluidGeneratorFuel(Materials.OilLight.getFluid(64), 5, GTValues.LV);
-        registerSemiFluidGeneratorFuel(Materials.OilMedium.getFluid(32), 15, GTValues.LV);
+        registerSemiFluidGeneratorFuel(Materials.Creosote.getFluid(16), 1, GTValues.LV);
+        registerSemiFluidGeneratorFuel(Materials.Biomass.getFluid(16), 1, GTValues.LV);
+        registerSemiFluidGeneratorFuel(Materials.OilLight.getFluid(32), 5, GTValues.LV);
+        registerSemiFluidGeneratorFuel(Materials.OilMedium.getFluid(64), 15, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.OilHeavy.getFluid(16), 5, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.SulfuricHeavyFuel.getFluid(16), 5, GTValues.LV);
         registerSemiFluidGeneratorFuel(Materials.HeavyFuel.getFluid(8), 15, GTValues.LV);
+        registerSemiFluidGeneratorFuel(Materials.FishOil.getFluid(64), 1, GTValues.LV);
+        if (GTValues.isModLoaded(GTValues.MODID_FR) && GAConfig.Misc.ForestryIntegration)
+            registerSemiFluidGeneratorFuel(Fluids.SEED_OIL.getFluid(64), 1, GTValues.LV);
+        else
+            registerSemiFluidGeneratorFuel(Materials.SeedOil.getFluid(64), 1, GTValues.LV);
 
         //plasma turbine
         registerPlasmaFuel(Materials.Helium.getPlasma(1), 2560, GTValues.LV);
@@ -61,6 +69,8 @@ public class FuelRecipes {
         registerPlasmaFuel(Materials.Iron.getPlasma(16), 103219, GTValues.LV);
         registerPlasmaFuel(Materials.Nickel.getPlasma(16), 106905, GTValues.LV);
 
+        //naquadah reactor fuels
+        registerNaquadahReactorFuel(Materials.NaquadahEnriched.getFluid(1), 750, GTValues.LV);
     }
 
     public static void registerPlasmaFuel(FluidStack fuelStack, int duration, int tier) {
@@ -81,5 +91,9 @@ public class FuelRecipes {
 
     public static void registerSemiFluidGeneratorFuel(FluidStack fuelStack, int duration, int tier) {
         RecipeMaps.SEMI_FLUID_GENERATOR_FUELS.addRecipe(new FuelRecipe(fuelStack, duration, GTValues.V[tier]));
+    }
+
+    public static void registerNaquadahReactorFuel(FluidStack fuelStack, int duration, int tier) {
+        RecipeMaps.NAQUADAH_REACTOR_FUELS.addRecipe(new FuelRecipe(fuelStack, duration, tier));
     }
 }
