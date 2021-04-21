@@ -7,13 +7,17 @@ import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.CokeOvenRecipeBuilder;
 import gregtech.api.recipes.builders.PBFRecipeBuilder;
+import gregtech.api.recipes.ingredients.FluidCellIngredient;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import gregtech.api.unification.material.MarkerMaterials.Tier;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.type.DustMaterial;
+import gregtech.api.unification.material.type.FluidMaterial;
 import gregtech.api.unification.material.type.IngotMaterial;
+import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
@@ -76,6 +80,7 @@ public class MachineRecipeLoader {
         registerRecyclingRecipes();
         registerStoneBricksRecipes();
         registerOrganicRecyclingRecipes();
+        registerReplicationRecipes();
     }
 
     private static void registerBendingCompressingRecipes() {
@@ -1053,6 +1058,79 @@ public class MachineRecipeLoader {
             ModHandler.addShapelessRecipe(stoneBlock.getRegistryName().getPath() + "_chiseling_" + variant,
                 stoneBlock.getItemVariant(variant, ChiselingVariant.CHISELED),
                 stoneBlock.getItemVariant(variant, ChiselingVariant.NORMAL));
+        }
+    }
+
+    private static void registerReplicationRecipes() {
+
+        //Mass Fab
+        RecipeMaps.MASS_FAB_RECIPES.recipeBuilder()
+                .fluidInputs(Materials.Hydrogen.getFluid(1000))
+                .fluidOutputs(Materials.PositiveMatter.getFluid(1))
+                .duration((int) (Materials.Hydrogen.getMass() * 100)).EUt(32).buildAndRegister();
+
+        for (Material m : Material.MATERIAL_REGISTRY) {
+            if (m.getProtons() > 0 && m.getNeutrons() > 0 && m.getMass() != 98 && m instanceof FluidMaterial && OreDictUnifier.get(OrePrefix.dust, m).isEmpty()) {
+
+                RecipeMaps.MASS_FAB_RECIPES.recipeBuilder()
+                        .fluidInputs(((FluidMaterial) m).getFluid(1000))
+                        .fluidOutputs(Materials.PositiveMatter.getFluid((int) m.getProtons()),
+                                Materials.NeutralMatter.getFluid((int) m.getNeutrons()))
+                        .duration((int) (m.getMass() * 100)).EUt(32).buildAndRegister();
+            }
+        }
+
+        RecipeMaps.MASS_FAB_RECIPES.recipeBuilder()
+                .inputs(OreDictUnifier.get(OrePrefix.dust, Materials.Neutronium))
+                .fluidOutputs(Materials.NeutralMatter.getFluid(5000))
+                .duration((int) (Materials.Neutronium.getMass() * 100)).EUt(32).buildAndRegister();
+
+        for (Material m : Material.MATERIAL_REGISTRY) {
+            if (m.getProtons() >= 1 && m.getNeutrons() >= 0 && m.getMass() != 98 && m instanceof DustMaterial && m != Materials.Sphalerite && m != Materials.Naquadria && m != Materials.Ash && m != Materials.DarkAsh && m != Materials.Neutronium && m != Materials.Monazite && m != Materials.Bentonite) {
+
+                RecipeMaps.MASS_FAB_RECIPES.recipeBuilder()
+                        .inputs(OreDictUnifier.get(OrePrefix.dust, m))
+                        .fluidOutputs(Materials.PositiveMatter.getFluid((int) m.getProtons()),
+                                Materials.NeutralMatter.getFluid((int) m.getNeutrons()))
+                        .duration((int) (m.getMass() * 100)).EUt(32).buildAndRegister();
+            }
+        }
+
+        //Replicator
+        RecipeMaps.REPLICATOR_RECIPES.recipeBuilder()
+                .inputs(FluidCellIngredient.getIngredient(Materials.Hydrogen, 0))
+                .fluidOutputs(Materials.Hydrogen.getFluid(1000))
+                .fluidInputs(Materials.PositiveMatter.getFluid(1))
+                .duration((int) (Materials.Hydrogen.getMass() * 100)).EUt(32).buildAndRegister();
+
+        for (Material m : Material.MATERIAL_REGISTRY) {
+            if (m.getProtons() > 0 && m.getNeutrons() > 0 && m.getMass() != 98 && m instanceof FluidMaterial && OreDictUnifier.get(OrePrefix.dust, m).isEmpty() && m != Materials.Air && m != Materials.LiquidAir) {
+
+                RecipeMaps.REPLICATOR_RECIPES.recipeBuilder()
+                        .inputs(FluidCellIngredient.getIngredient((FluidMaterial) m, 0))
+                        .fluidOutputs(((FluidMaterial) m).getFluid(1000))
+                        .fluidInputs(Materials.PositiveMatter.getFluid((int) m.getProtons()),
+                                Materials.NeutralMatter.getFluid((int) m.getNeutrons()))
+                        .duration((int) (m.getMass() * 100)).EUt(32).buildAndRegister();
+            }
+        }
+
+        RecipeMaps.REPLICATOR_RECIPES.recipeBuilder()
+                .notConsumable(OreDictUnifier.get(OrePrefix.dust, Materials.Neutronium))
+                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Neutronium))
+                .fluidInputs(Materials.NeutralMatter.getFluid(5000))
+                .duration((int) (Materials.Neutronium.getMass() * 100)).EUt(32).buildAndRegister();
+
+        for (Material m : Material.MATERIAL_REGISTRY) {
+            if (m.getProtons() >= 1 && m.getNeutrons() >= 0 && m.getMass() != 98 && m instanceof DustMaterial && m != Materials.Sphalerite && m != Materials.Naquadria && m != Materials.Ash && m != Materials.DarkAsh && m != Materials.Neutronium && m != Materials.Monazite && m != Materials.Bentonite) {
+
+                RecipeMaps.REPLICATOR_RECIPES.recipeBuilder()
+                        .notConsumable(OreDictUnifier.get(OrePrefix.dust, m))
+                        .outputs(OreDictUnifier.get(OrePrefix.dust, m))
+                        .fluidInputs(Materials.PositiveMatter.getFluid((int) m.getProtons()),
+                                Materials.NeutralMatter.getFluid((int) m.getNeutrons()))
+                        .duration((int) (m.getMass() * 100)).EUt(32).buildAndRegister();
+            }
         }
     }
 }

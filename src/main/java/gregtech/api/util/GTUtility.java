@@ -12,6 +12,7 @@ import gregtech.api.items.IToolItem;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.common.ConfigHolder;
+import gregtech.common.items.MetaItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.properties.IProperty;
@@ -40,15 +41,16 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -715,5 +717,18 @@ public class GTUtility {
 
     public static int getRandomIntXSTR(int bound) {
         return random.nextInt(bound);
+    }
+
+    public static ItemStack getFilledCell(Fluid fluid, int count) {
+        ItemStack fluidCell = MetaItems.FLUID_CELL.getStackForm().copy();
+        IFluidHandlerItem fluidHandlerItem = fluidCell.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+        if (fluidHandlerItem != null) {
+            fluidHandlerItem.fill(new FluidStack(fluid, 1000), true);
+            fluidCell = fluidHandlerItem.getContainer();
+            fluidCell.setCount(count);
+            return fluidCell;
+        }
+        GTLog.logger.error("Fluid Cell failed to provide fluid handler!!", new IllegalStateException());
+        return null;
     }
 }
