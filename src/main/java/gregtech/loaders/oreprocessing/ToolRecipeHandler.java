@@ -423,6 +423,15 @@ public class ToolRecipeHandler {
                 "XX ", "XXS", "XX ",
                 'X', new UnificationEntry(OrePrefix.ingot, solidMaterial),
                 'S', new UnificationEntry(OrePrefix.stick, handleMaterial));
+
+        } else if (!OreDictUnifier.get(OrePrefix.gem, solidMaterial).isEmpty()
+                && !OreDictUnifier.get(OrePrefix.toolHeadHammer, solidMaterial).isEmpty()
+                && solidMaterial != Materials.Flint) {
+            ModHandler.addMirroredShapedRecipe(String.format("gem_hammer_%s", solidMaterial.toString()),
+                    MetaItems.HARD_HAMMER.getStackForm(solidMaterial),
+                    "GG ", "GGS", "GG ",
+                    'G', new UnificationEntry(OrePrefix.gem, solidMaterial),
+                    'S', new UnificationEntry(OrePrefix.stick, Materials.Wood));
         }
 
         if (!solidMaterial.hasFlag(DustMaterial.MatFlags.NO_SMASHING)) {

@@ -1,5 +1,6 @@
 package gregtech.loaders.oreprocessing;
 
+import gregtech.api.items.toolitem.ToolMetaItem;
 import gregtech.api.recipes.CountableIngredient;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
@@ -12,6 +13,7 @@ import gregtech.api.unification.material.type.DustMaterial.MatFlags;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
+import gregtech.common.ConfigHolder;
 import gregtech.common.items.MetaItems;
 import net.minecraft.item.ItemStack;
 
@@ -187,9 +189,25 @@ public class MaterialRecipeHandler {
         }
 
         if (!material.hasFlag(MatFlags.NO_SMASHING) && material.toolDurability > 0) {
-            ModHandler.addShapedRecipe(String.format("wrench_%s", material.toString()),
-                MetaItems.WRENCH.getStackForm(material),
-                "IhI", "III", " I ", 'I', new UnificationEntry(ingotPrefix, material));
+            if (GAConfig.GT6.ExpensiveWrenches && !OreDictUnifier.get(OrePrefix.plate, material).isEmpty()) {
+                ModHandler.addShapedRecipe(String.format("wrench_%s", material.toString()),
+                        MetaItems.WRENCH.getStackForm(material),
+                        "PhP", "PPP", " P ", 'P', new UnificationEntry(OrePrefix.plate, material));
+            } else {
+                ModHandler.addShapedRecipe(String.format("wrench_%s", material.toString()),
+                        MetaItems.WRENCH.getStackForm(material),
+                        "IhI", "III", " I ", 'I', new UnificationEntry(ingotPrefix, material));
+            }
+
+            if (GAConfig.GT6.BendingCylinders) {
+                ModHandler.addShapedRecipe(String.format("cylinder_%s", material.toString()),
+                        GAMetaItems.BENDING_CYLINDER.getStackForm(material),
+                        "sfh", "XXX", "XXX", 'X', new UnificationEntry(OrePrefix.ingot, material));
+
+                ModHandler.addShapedRecipe(String.format("small_cylinder_%s", material.toString()),
+                        GAMetaItems.SMALL_BENDING_CYLINDER.getStackForm(material),
+                        "sfh", "XXX", 'X', new UnificationEntry(OrePrefix.ingot, material));
+            }
         }
 
         if (material.hasFlag(GENERATE_ROD)) {

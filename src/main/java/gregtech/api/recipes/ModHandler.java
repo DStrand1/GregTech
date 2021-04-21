@@ -190,6 +190,8 @@ public class ModHandler {
      * <li>'s' -  ToolDictNames.craftingToolSaw</li>
      * <li>'w' -  ToolDictNames.craftingToolWrench</li>
      * <li>'x' -  ToolDictNames.craftingToolWireCutter</li>
+     * <li>'y' -  ToolDictNames.craftingToolBendingCylinder</li>
+     * <li>'z' -  ToolDictNames.craftingToolBendingCylinderSmall</li>
      * </ul>
      */
     public static void addMirroredShapedRecipe(String regName, ItemStack result, Object... recipe) {
@@ -438,6 +440,10 @@ public class ModHandler {
                 return ToolDictNames.craftingToolWrench.name();
             case 'x':
                 return ToolDictNames.craftingToolWireCutter.name();
+            case 'y':
+                return ToolDictNames.craftingToolBendingCylinder.name();
+            case 'z':
+                return ToolDictNames.craftingToolBendingCylinderSmall.name();
             default:
                 return null;
         }

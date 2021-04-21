@@ -178,6 +178,13 @@ public class MetaTool extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem> {
 
         PLUNGER = addItem(37, "tool.plunger").setToolStats(new ToolPlunger())
             .addOreDict(ToolDictNames.craftingToolPlunger);
+
+        // TODO RECIPES
+        BENDING_CYLINDER = addItem(38, "tool.bending_cylinder").setToolStats(new ToolBendingCylinder())
+                .addOreDict(ToolDictNames.craftingToolBendingCylinder);
+
+        SMALL_BENDING_CYLINDER = addItem(39, "tool.bending_cylinder_small").setToolStats(new ToolSmallBendingCylinder())
+                .addOreDict(ToolDictNames.craftingToolBendingCylinderSmall);
     }
 
     public void registerRecipes() {
