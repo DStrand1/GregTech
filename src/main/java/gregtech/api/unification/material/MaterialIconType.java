@@ -76,6 +76,7 @@ public enum MaterialIconType {
     turbineBlade,
     handleMallet,
     toolHeadMallet,
+    plateCurved,
 
     //BLOCK TEXTURES
     block,

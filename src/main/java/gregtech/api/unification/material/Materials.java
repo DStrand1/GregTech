@@ -520,8 +520,7 @@ public class Materials {
     public static final DustMaterial Meat = new DustMaterial(938, "meat", 12667980, SAND, 1, of(), DISABLE_DECOMPOSITION);
     public static final FluidMaterial NeutralMatter = new FluidMaterial(883, "neutral_matter", 3956968, FLUID, of(), DISABLE_DECOMPOSITION);
     public static final FluidMaterial PositiveMatter = new FluidMaterial(882, "positive_matter", 11279131, FLUID, of(), DISABLE_DECOMPOSITION);
-    // TODO element Nt
-    public static final IngotMaterial Neutronium = new IngotMaterial(972, "neutronium", 12829635, METALLIC, 6, of(), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR | GENERATE_LONG_ROD | GENERATE_FRAME, Element.valueOf("Nt"), 24.0F, 12F, 655360);
+    public static final IngotMaterial Neutronium = new IngotMaterial(972, "neutronium", 12829635, METALLIC, 6, of(), EXT2_METAL | GENERATE_RING | GENERATE_ROTOR | GENERATE_SMALL_GEAR | GENERATE_LONG_ROD | GENERATE_FRAME, Element.Nt, 24.0F, 12F, 655360);
     public static final GemMaterial LigniteCoke = new GemMaterial(879, "lignite_coke", 0x8b6464, LIGNITE, 1, of(new MaterialStack(Materials.Carbon, 1)), DECOMPOSITION_BY_ELECTROLYZING | MORTAR_GRINDABLE | FLAMMABLE | NO_SMELTING | NO_SMASHING);
 
     static {

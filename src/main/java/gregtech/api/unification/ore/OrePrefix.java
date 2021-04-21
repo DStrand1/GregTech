@@ -159,7 +159,14 @@ public enum OrePrefix {
     batterySingleUse("Single Use Batteries", -1, null, null, DISALLOW_RECYCLING, null),
     battery("Reusable Batteries", -1, null, null, DISALLOW_RECYCLING, null), // Introduced by Calclavia
     circuit("Circuits", -1, null, null, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null), // Introduced by Calclavia
-    chipset("Chipsets", -1, null, null, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null); // Introduced by Buildcraft
+    chipset("Chipsets", -1, null, null, ENABLE_UNIFICATION | DISALLOW_RECYCLING, null), // Introduced by Buildcraft
+
+    // Taken from SoG
+    // TODO CONFIG VALUES CHECKS HERE FOR TOP TWO
+    plateCurved("Curved Plate", M, null, MaterialIconType.plateCurved, ENABLE_UNIFICATION, material -> material instanceof IngotMaterial && material.hasFlag(GENERATE_PLATE)),
+    ingotDouble("Double Ingot", M * 2, null, MaterialIconType.ingotDouble, ENABLE_UNIFICATION, material -> material instanceof IngotMaterial && material.hasFlag(GENERATE_PLATE)),
+    round("Round", M / 9, null, MaterialIconType.round, ENABLE_UNIFICATION, material -> material instanceof IngotMaterial && material.hasFlag(GENERATE_SMALL_GEAR));
+
 
     public static class Flags {
         public static final long ENABLE_UNIFICATION = GTUtility.createFlag(0);
