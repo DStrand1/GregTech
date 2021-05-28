@@ -57,6 +57,12 @@ public class CableEnergyContainer implements IEnergyContainer {
             }
         }
         energyNet.incrementCurrentAmperage(amperage, voltage);
+
+        // burn over-amped paths
+        long lastAmperage = energyNet.getLastAmperage();
+        if (lastAmperage > getInputAmperage())
+            burnAllPaths(paths, voltage, getInputAmperage(), lastAmperage);
+
         return amperesUsed;
     }
 
