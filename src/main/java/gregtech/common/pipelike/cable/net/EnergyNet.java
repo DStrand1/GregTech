@@ -3,6 +3,7 @@ package gregtech.common.pipelike.cable.net;
 import gregtech.api.pipenet.Node;
 import gregtech.api.pipenet.PipeNet;
 import gregtech.api.pipenet.WorldPipeNet;
+import gregtech.api.util.GTLog;
 import gregtech.api.util.PerTickLongCounter;
 import gregtech.common.pipelike.cable.WireProperties;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,15 +11,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class EnergyNet extends PipeNet<WireProperties> {
 
     private final PerTickLongCounter currentAmperageCounter = new PerTickLongCounter(0L);
     private final PerTickLongCounter currentMaxVoltageCounter = new PerTickLongCounter(0L);
+
+    private final Map<BlockPos, PerTickLongCounter> perNodeAmperageCounter = new TreeMap<>();
 
     protected EnergyNet(WorldPipeNet<WireProperties, EnergyNet> world) {
         super(world);
@@ -38,6 +38,23 @@ public class EnergyNet extends PipeNet<WireProperties> {
         if (voltage > currentMaxVoltage) {
             currentMaxVoltageCounter.set(worldData.getWorld(), voltage);
         }
+    }
+
+    public long incrementPathAmperage(long amperage, RoutePath path) {
+        for (Map.Entry<BlockPos, WireProperties> entry : path.path.entrySet()) {
+            PerTickLongCounter counter = perNodeAmperageCounter.get(entry.getKey());
+            if (counter == null)
+                counter = new PerTickLongCounter(0L);
+            counter.increment(getWorldData(), amperage);
+            perNodeAmperageCounter.put(entry.getKey(), counter);
+            long current = counter.get(getWorldData());
+            if (current > entry.getValue().amperage) {
+                GTLog.logger.info("I BURNED IT!!");
+                GTLog.logger.info("Current: {}, Entry amperage: {}", current, entry.getValue().amperage);
+                return current;
+            }
+        }
+        return -1;
     }
 
     public List<RoutePath> computePatches(BlockPos startPos) {

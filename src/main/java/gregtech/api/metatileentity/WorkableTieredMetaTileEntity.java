@@ -42,10 +42,10 @@ public abstract class WorkableTieredMetaTileEntity extends TieredMetaTileEntity 
         return new RecipeLogicEnergy(this, recipeMap, () -> energyContainer);
     }
 
-    @Override
-    protected long getMaxInputOutputAmperage() {
-        return 2L;
-    }
+    //@Override
+    //protected long getMaxInputOutputAmperage() {
+    //    return 2L;
+    //}
 
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {

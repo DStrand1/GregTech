@@ -109,6 +109,11 @@ public class ConfigHolder {
     @Config.RequiresMcRestart
     public static boolean doLosslessWiresMakeLossyCables = false;
 
+    @Config.Comment("LEGACY: This setting is ignored for worlds created on or after GTCE 1.16. It exists to temporarily prevent damage to old worlds when updating versions. " +
+            "If true, GregTech will use old EnergyNet mechanics (cables can be over-amped by multiple EU-producers). " +
+            "If false, the fixed mechanics will be applied and setups exploiting the old behavior will burn or explode. Default: true")
+    public static boolean useOldEnergyMechanicsForLegacyWorlds = true;
+
     public static class VanillaRecipes {
 
         @Config.Comment("Whether to nerf the paper crafting recipe. Default: true")

@@ -43,11 +43,17 @@ public class CableEnergyContainer implements IEnergyContainer {
             }
             BlockPos destinationPos = routePath.destination;
             int blockedConnections = energyNet.getAllNodes().get(destinationPos).blockedConnections;
-            amperesUsed += dispatchEnergyToNode(destinationPos, blockedConnections,
+            long amperesToDest = dispatchEnergyToNode(destinationPos, blockedConnections,
                 voltage - routePath.totalLoss, amperage - amperesUsed);
+            amperesUsed += amperesToDest;
+            long overAmp = energyNet.incrementPathAmperage(amperesToDest, routePath);
+            if (overAmp != -1) {
+                routePath.burnCablesInPath(tileEntityCable.getPipeWorld(), voltage, overAmp);
+                //burnAllPaths(paths, voltage, 0, overAmp);
+                break;
+            }
 
-            if (voltage > routePath.minVoltage ||
-                amperesUsed > routePath.maxAmperage) {
+            if (voltage > routePath.minVoltage) {
                 burnAllPaths(paths, voltage, amperage, amperesUsed);
                 break; //break after burning all paths
             }
@@ -57,11 +63,6 @@ public class CableEnergyContainer implements IEnergyContainer {
             }
         }
         energyNet.incrementCurrentAmperage(amperage, voltage);
-
-        // burn over-amped paths
-        long lastAmperage = energyNet.getLastAmperage();
-        if (lastAmperage > getInputAmperage())
-            burnAllPaths(paths, voltage, getInputAmperage(), lastAmperage);
 
         return amperesUsed;
     }
@@ -98,6 +99,12 @@ public class CableEnergyContainer implements IEnergyContainer {
                 break;
         }
         blockPos.release();
+
+        // burn over-amped paths
+        //long lastAmperage = getEnergyNet().getLastAmperage();
+        //if (lastAmperage > getInputAmperage())
+        //    burnAllPaths(pathsCache, voltage, getInputAmperage(), lastAmperage);
+
         return amperesUsed;
     }
 
